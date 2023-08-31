@@ -5,8 +5,8 @@ name = "pypi"
 
 [packages]
 fastapi = "*"
-redis-om = "*"
 uvicorn = "*"
+redis-om = "*"
 
 [dev-packages]
 

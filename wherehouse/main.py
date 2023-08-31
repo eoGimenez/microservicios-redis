@@ -52,6 +52,10 @@ def create(product: ProductCreate):
 def get_one(pk: str):
     return Product.get(pk)
 
+@app.delete('/product/{pk}')
+def delete(pk: str):
+    return Product.delete(pk)
+
 def format_products(pk: str):
     product = Product.get(pk)
     return product
