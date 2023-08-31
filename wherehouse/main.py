@@ -23,8 +23,9 @@ class Product(HashModel):
     name:str
     price: float
     quantity: int
+
     class Meta:
-        database= redis
+        database = redis
 
 class ProductCreate(BaseModel):
     name: str
@@ -45,8 +46,8 @@ def all():
 @app.post('/product')
 def create(product: ProductCreate):
     product_instance = Product(**product.model_dump())
-    product_instance.save()
-    return product_instance
+    return product_instance.save()
+
 
 @app.get('/product/{pk}')
 def get_one(pk: str):
