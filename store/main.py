@@ -1,10 +1,13 @@
+import time
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.background import BackgroundTasks
 from pydantic import BaseModel
 from redis_om import get_redis_connection, HashModel
 import requests
-import time
+from enviroments.config import Settings, get_settings
+
+dotenv: Settings = get_settings()
 
 
 app = FastAPI()
@@ -17,9 +20,9 @@ app.add_middleware(
 )
 
 redis = get_redis_connection(
-    host='redis-12878.c300.eu-central-1-1.ec2.cloud.redislabs.com',
-    port=12878,
-    password='0TOCYuEuly0piSZWRZn8aTIoOSLKVlWH',
+    host=dotenv.HOST,
+    port=dotenv.PORT,
+    password=dotenv.PASSWORD,
     decode_responses=True
 )
 

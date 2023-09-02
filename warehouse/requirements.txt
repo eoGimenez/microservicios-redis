@@ -1,3 +1,5 @@
 fastapi
 uvicorn
 redis-om
+pydantic-settings
+python-dotenv

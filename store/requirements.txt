@@ -2,3 +2,5 @@ fastapi
 uvicorn
 redis-om
 requests
+pydantic-settings
+python-dotenv
