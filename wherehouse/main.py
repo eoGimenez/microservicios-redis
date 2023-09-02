@@ -37,11 +37,7 @@ class ProductCreate(BaseModel):
 
 @app.get('/product')
 def all():
-    all_products = []
-    products_to_format = Product.all_pks()
-    for product in products_to_format:
-        all_products.append(format_products(product))
-    return all_products
+    return [format_products(pk) for pk in Product.all_pks()]
 
 @app.post('/product')
 def create(product: ProductCreate):
@@ -58,5 +54,4 @@ def delete(pk: str):
     return Product.delete(pk)
 
 def format_products(pk: str):
-    product = Product.get(pk)
-    return product
+    return Product.get(pk)
