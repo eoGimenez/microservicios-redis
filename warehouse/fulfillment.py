@@ -1,5 +1,5 @@
 import time
-from main import redis, Product, ProductCreate
+from main import redis, Product
 
 key = 'order-completed'
 group = 'warehouse-group'
@@ -17,10 +17,13 @@ while True:
         if results != []:
             for result in results:
                 obj = result[1][0][1]
-                product = Product.get(obj['product_id'])
-                product.quantity -= int(obj['quantity'])
-                product.save()
-                print(product)
+                try:
+                    product = Product.get(obj['product_id'])
+                    product.quantity -= int(obj['quantity'])
+                    product.save()
+                    print(product)
+                except:
+                    redis.xadd(name = 'refund-order', fields = obj)
     except Exception as e:
         print(str(e))
     time.sleep(3)
