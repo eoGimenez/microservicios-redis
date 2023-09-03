@@ -12,7 +12,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['http://localhost:3000'],
+    allow_origins=['http://localhost:3000', 'http://localhost:5173'],
     allow_methods= ['*'],
     allow_headers= ['*']
 )
@@ -46,6 +46,7 @@ def all():
 
 @app.post('/product')
 def create(product: ProductCreate):
+    
     product_instance = Product(**product.model_dump())
     return product_instance.save()
 
